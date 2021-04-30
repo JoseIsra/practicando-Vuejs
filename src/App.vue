@@ -1,28 +1,36 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <pm-header />
+    <router-view></router-view>
+    <pm-footer />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import PmFooter from './components/layout/Footer.vue';
+import PmHeader from './components/layout/Header.vue';
+
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
+    PmFooter, PmHeader,
   },
 };
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+@import "./styles/global.scss";
+
+// .main__box {
+//   height:70vh;
+//   padding:10px;
+//   display:flex;
+//   flex-wrap:wrap;
+//   justify-content:space-around;
+//   align-items:center;
+// }
+// .is-active{
+//   border:3px solid green;
+// }
 </style>
