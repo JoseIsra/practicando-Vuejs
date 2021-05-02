@@ -1,10 +1,10 @@
 <template>
-<div class="container">
+<div class="container" v-if="character && character.id">
   <div class="columns">
     <div class="column is-3 has-text-centered">
       <figure class="media-left">
         <p class="image">
-          <img :src="info.image" >
+          <img :src="character.image" >
         </p>
         <p>
           <button 
@@ -16,13 +16,13 @@
     <div class="column is-8">
       <div class="panel">
         <div class="panel-heading">
-          <h1 class="title">{{info.name}}</h1>
+          <h1 class="title">{{nameTitle}}</h1>
         </div>
         <div class="panel-block">
           <article class="media">
             <div class="media-content">
-              <div class="content">
-                <ul v-for="item in info" :key="item.id">
+              <div class="content" >
+                <ul v-for="item in character" :key="item.id">
                   <li  ><strong>{{item}}</strong></li>
                 </ul>
               </div>
@@ -36,17 +36,25 @@
 </template>
 
 <script>
-import { getById } from '../services/rick-morty';
+import { mapState, mapActions, mapGetters } from 'vuex'; 
 import characterMixin from '../mixins/character';
 
 export default {
-  data: () => ({
-    info: null,
-  }),
+
+  computed: {
+    ...mapState(['character']),
+    ...mapGetters(['nameTitle']),
+  },
   mixins: [characterMixin],
-  async created() {
+  created() {
     const { id } = this.$route.params;
-    this.info = await getById(id);
+    if (!this.character || !this.character.id || this.character.id !== id) {
+      this.getCharacterById({ id })
+        .then(() => console.log('hecho'));
+    }
+  },
+  methods: {
+    ...mapActions(['getCharacterById']),
   },
 };
 </script>

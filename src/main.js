@@ -5,6 +5,7 @@ import eventBus from './plugins/event-buss';
 import routes from './routes';
 import stringChanged from './filters/capitalize';
 import blur from './directives/blur';
+import store from './store';
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
@@ -18,4 +19,5 @@ const router = new VueRouter({
 new Vue({
   render: (h) => h(App),
   router,
+  store,
 }).$mount('#app');

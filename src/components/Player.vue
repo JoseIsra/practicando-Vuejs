@@ -1,21 +1,18 @@
 <template>
   <div class="content">
     <p v-if="character">
-      <strong>{{character.name | capitalize  }}</strong>
+      <strong >{{character.name | capitalize  }}</strong>
       <small>{{character.status}}</small>
     </p>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
-  data: () => ({
-    character: null,
-  }),
-  created() {
-    this.$bus.$on('set-character', (simpleCharacter) => {
-      this.character = simpleCharacter;
-    });
+  computed: {
+    ...mapState(['character']),
   },
 };
 </script>
